@@ -1,4 +1,5 @@
 1. Database Structure
+   
 🧑‍🎓 Students Table
 Stores student personal details.
 
