@@ -61,21 +61,32 @@ INSERT INTO Enrollments (EnrollmentID, StudentID, CourseID, EnrollmentDate, Grad
 (13, 12, 102, '2025-05-03', 'C'),
 (14, 13, 103, '2025-05-04', 'B'),
 (15, 14, 104, '2025-05-02', 'A');
-SELECT * FROM Students WHERE Age > 18;     /*to get student whose age greater than 18*/
- SELECT * FROM Courses WHERE CreditHours !=3;   /*to get course credithours not equal to 3; it can get check by "<>" for not equal to*/
- SELECT * FROM Students WHERE FirstName LIKE 'A%'; /* to get student first name start with A*/
- ALTER TABLE Enrollments   /* it is compulsory to write datatype of variable, its default value stored how, and how it modified*/
+
+/*4.   to get student whose age greater than 18*/
+SELECT * FROM Students WHERE Age > 18;  
+
+/*5.  to get course credithours not equal to 3; it can get check by "<>" for not equal to*/
+ SELECT * FROM Courses WHERE CreditHours !=3; 
+
+/*6.    to get student first name start with A*/
+ SELECT * FROM Students WHERE FirstName LIKE 'A%'; 
+
+/*7.   it is compulsory to write datatype of variable, its default value stored how, and how it modified*/
+ ALTER TABLE Enrollments  
 MODIFY COLUMN EnrollmentDate DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
+/* 8.  updated enrollments table to check current timestamp value */
 select * from enrollments;
-UPDATE Enrollments      /* updated enrollments table to check current timestamp value */
+UPDATE Enrollments      
 SET Studentid = 5
 WHERE EnrollmentID = 2;
 select * from enrollments;
-/*     List all enrollments with student and course names from foreign key constraint using enrollment table*/
+
+/* 9.    List all enrollments with student and course names from foreign key constraint using enrollment table*/
 SELECT S.FirstName, S.LastName, C.CourseName, E.Grade FROM Enrollments E
 JOIN Students S ON E.StudentID = S.StudentID
 JOIN Courses C ON E.CourseID = C.CourseID;
-    /*Count of students enrolled per course by directly joining enrollment table and courses table*/
+
+/* 10.   Count of students enrolled per course by directly joining enrollment table and courses table*/
 SELECT C.CourseName, COUNT(E.StudentID) AS TotalEnrolled FROM Courses C
 JOIN Enrollments E ON C.CourseID = E.CourseID
 GROUP BY C.CourseName;
